@@ -33,12 +33,14 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
 
         String token = sharedPreferences.getString("token",null);
-        JWT parsedJWT = new JWT(token);
+        if (token!=null) {
+            JWT parsedJWT = new JWT(token);
 
-        titulo.setText(parsedJWT.getClaim("titular").asString());
-        url.setText(parsedJWT.getClaim("url").asString());
-        email.setText(parsedJWT.getClaim("email").asString());
-        solicitud.setText(parsedJWT.getClaim("solicitud").asString());
+            titulo.setText(parsedJWT.getClaim("titular").asString());
+            url.setText(parsedJWT.getClaim("url").asString());
+            email.setText(parsedJWT.getClaim("email").asString());
+            solicitud.setText(parsedJWT.getClaim("solicitud").asString());
+        }
 
         btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
